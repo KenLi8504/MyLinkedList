@@ -33,46 +33,58 @@ public class MyLinkedList{
     return true;
   }
 
-  public boolean add(int index, String value){
+  public void add(int index, String value){
     Node NewNode = new Node (value);
-    int i = 0;
-    Node Current = start;
-    if ( index < 0 || index > size){
-      throw new IndexOutOfBoundsException ("this is not a valid index!");
-    }
-    else if (index == 0){
-      start.setPrev(NewNode);
-      NewNode.setNext(start);
+    if (size == 0){
       start = NewNode;
+      end = NewNode;
       size = size + 1;
     }
-    else if ( index < size){
-      while (i < index - 1){
-        Current = Current.getNext();
-        i = i + 1;
-
-      }
-      Node PlaceHolder = Current.getNext();
-      Current.setNext(NewNode);
-      NewNode.setNext(PlaceHolder);
-      NewNode.setPrev(Current);
-      PlaceHolder.setPrev(NewNode);
-   	  size = size + 1;
-    }
     else{
-      add(value);
+      int i = 0;
+      Node Current = start;
+      if ( index < 0 || index > size){
+        throw new IndexOutOfBoundsException ("this is not a valid index!");
+      }
+      else if (index == 0){
+        start.setPrev(NewNode);
+        NewNode.setNext(start);
+        start = NewNode;
+        size = size + 1;
+      }
+      else if ( index < size){
+        while (i < index - 1){
+          Current = Current.getNext();
+          i = i + 1;
+        }
+        Node PlaceHolder = Current.getNext();
+        Current.setNext(NewNode);
+        NewNode.setNext(PlaceHolder);
+        NewNode.setPrev(Current);
+        PlaceHolder.setPrev(NewNode);
+        size = size + 1;
+      }
+      else{
+        add(value);
+      }
     }
-    return true;
   }
 
-
   public String get(int index){
+    if (size == 0){
+      return "This is an empty LinkedList!";
+    }
+    else if (index > size() - 1 || index < 0){
+      throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
+    else{
     Node Current = start;
     for (int i = 0; i < index; i++){
       Current = Current.getNext();
     }
     return Current.getData();
   }
+}
 
   public String set (int index, String value){
     Node Current = start;
@@ -85,6 +97,9 @@ public class MyLinkedList{
  }
 
   public String toString(){
+    if (size == 0){
+      return "[]";
+    }
     String LinkedList = "[";
     Node Current = start;
     while (Current.getNext() != null){
@@ -106,39 +121,5 @@ public class MyLinkedList{
     LinkedList = LinkedList + Current.getData();
     LinkedList = LinkedList + "]";
     return LinkedList;
-  }
-
-  public static void main(String[]args){
-    MyLinkedList words = new MyLinkedList();
-
-    //add 0-9 in order
-    for(int i = 0; i < 10; i++){
-      words.add(i+"");
-    }
-    //insert 0x - 9x before each value 0-9
-    for(int i = 0; i < 10; i++){
-      words.add(2*i,i+"x");
-    }
-    //check the head/tail add
-    words.add(0,"head");
-    words.add(words.size(),"tail");
-
-    try{
-      words.add(-1,"");
-      System.out.println("ERROR! Added to negative index");
-    }catch(IndexOutOfBoundsException e){
-
-    }
-
-    try{
-      words.add(words.size()+1,"");
-      System.out.println("ERROR! Added to (size + 1) index");
-    }catch(IndexOutOfBoundsException e){
-
-    }
-
-    System.out.println("\nYour result:\n"+words.toStringReversed()+" "+words.size());
-    System.out.println("expected:\n[tail, 9, 9x, 8, 8x, 7, 7x, 6, 6x, 5, 5x, 4, 4x, 3, 3x, 2, 2x, 1, 1x, 0, 0x, head] 22");
-
   }
 }
