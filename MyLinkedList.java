@@ -68,29 +68,25 @@ public class MyLinkedList{
     return Current.getData();
   }
 
-  //public String set (int index, String value){
-//  }
+  public String set (int index, String value){
+    Node Current = start;
+    for (int i = 0; i < index; i++){
+      Current = Current.getNext();
+    }
+    String ReplacedValue = Current.getData();
+    Current.setData(value);
+    return ReplacedValue;
+ }
 
   public String toString(){
-    String LinkedList = "";
+    String LinkedList = "[";
     Node Current = start;
     while (Current.getNext() != null){
-      LinkedList = LinkedList + Current.getData();
+      LinkedList = LinkedList + Current.getData() + ",";
       Current = Current.getNext();
     }
     LinkedList = LinkedList + Current.getData();
+    LinkedList = LinkedList + "]";
     return LinkedList;
-  }
-
-  public static void main (String [] args){
-    MyLinkedList Test = new MyLinkedList();
-    Test.add("0");
-    Test.add("1");
-    Test.add("2");
-    Test.add("3");
-    System.out.println(Test.toString());
-    Test.add(2,"4");
-    System.out.println(Test.toString());
-    System.out.println(Test.get(3));
   }
 }
