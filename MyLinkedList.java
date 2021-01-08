@@ -25,6 +25,7 @@ public class MyLinkedList{
         Current = Current.getNext();
       }
       Current.setNext(NewNode);
+      NewNode.setNext(null);
       size = size + 1;
     }
     return true;
@@ -52,12 +53,30 @@ public class MyLinkedList{
   public String get(int index){
 
   }
+
   public String set (int index, String value){
-
   }
+
+*/
+
   public String toString(){
-
-
+    String LinkedList = "";
+    Node Current = start;
+    while (Current.getNext() != null){
+      LinkedList = LinkedList + Current.getData();
+      Current = Current.getNext();
+    }
+    LinkedList = LinkedList + Current.getData();
+    return LinkedList;
   }
-  */
+
+  public static void main (String [] args){
+    MyLinkedList Test = new MyLinkedList();
+    Test.add("hi");
+    Test.add("hi2");
+    Test.add("hi3");
+    Test.add("hi4");
+    System.out.println(Test.size());
+    System.out.println(Test.toString());
+  }
 }
