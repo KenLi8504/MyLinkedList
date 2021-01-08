@@ -30,10 +30,25 @@ public class MyLinkedList{
     return true;
   }
 
-  /*
   public boolean add(int index, String value){
-
+    Node NewNode = new Node (value);
+    int i = 0;
+    Node Current = start;
+    if ( index < 0 || index > size){
+      throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
+    else{
+      while (i < index){
+        Current = Current.getNext();
+      }
+      Node PlaceHolder = Current.getNext();
+      Current.setNext(NewNode);
+      NewNode.setNext(PlaceHolder);
+    }
+    return true;
   }
+
+  /*
   public String get(int index){
 
   }
