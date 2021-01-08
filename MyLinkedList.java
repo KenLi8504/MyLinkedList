@@ -26,6 +26,7 @@ public class MyLinkedList{
       }
       Current.setNext(NewNode);
       NewNode.setNext(null);
+      NewNode.setPrev(Current);
       size = size + 1;
     }
     return true;
@@ -51,6 +52,8 @@ public class MyLinkedList{
       Node PlaceHolder = Current.getNext();
       Current.setNext(NewNode);
       NewNode.setNext(PlaceHolder);
+      NewNode.setPrev(Current);
+      PlaceHolder.setPrev(NewNode);
    	  size = size + 1;
     }
     else{
@@ -84,6 +87,18 @@ public class MyLinkedList{
     while (Current.getNext() != null){
       LinkedList = LinkedList + Current.getData() + ",";
       Current = Current.getNext();
+    }
+    LinkedList = LinkedList + Current.getData();
+    LinkedList = LinkedList + "]";
+    return LinkedList;
+  }
+
+  public String toStringReversed(){
+    String LinkedList = "[";
+    Node Current = end;
+    while (Current.getPrev() != null){
+      LinkedList = LinkedList + Current.getData() + ",";
+      Current = Current.getPrev();
     }
     LinkedList = LinkedList + Current.getData();
     LinkedList = LinkedList + "]";
