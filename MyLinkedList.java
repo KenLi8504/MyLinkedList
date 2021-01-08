@@ -21,9 +21,11 @@ public class MyLinkedList{
     }
     else{
       Node Current = start;
-      while (Current.next() != null){
-        Current = Current.next();
+      while (Current.getNext() != null){
+        Current = Current.getNext();
       }
+      Current.setNext(NewNode);
+      size = size + 1;
     }
     return true;
   }
@@ -40,7 +42,7 @@ public class MyLinkedList{
   }
   public String toString(){
 
-  }
 
+  }
   */
 }
