@@ -4,6 +4,7 @@ public class MyLinkedList{
 
   public MyLinkedList(){
     size = 0;
+    start = new Node(null);
   }
 
   public int size(){
@@ -12,11 +13,21 @@ public class MyLinkedList{
 
 
   public boolean add (String value){
-    Node NewTerm = new Node (value);
-    size = size + 1;
+    Node NewNode = new Node (value);
+    if (size == 0){
+      start = NewNode;
+      end = NewNode;
+      size = size + 1;
+    }
+    else{
+      Node Current = start;
+      while (Current.next() != null){
+        Current = Current.next();
+      }
+    }
     return true;
   }
-  
+
   /*
   public boolean add(int index, String value){
 
