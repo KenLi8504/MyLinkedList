@@ -59,15 +59,17 @@ public class MyLinkedList{
     return true;
   }
 
-  /*
+
   public String get(int index){
-
+    Node Current = start;
+    for (int i = 0; i < index; i++){
+      Current = Current.getNext();
+    }
+    return Current.getData();
   }
 
-  public String set (int index, String value){
-  }
-
-*/
+  //public String set (int index, String value){
+//  }
 
   public String toString(){
     String LinkedList = "";
@@ -89,5 +91,6 @@ public class MyLinkedList{
     System.out.println(Test.toString());
     Test.add(2,"4");
     System.out.println(Test.toString());
+    System.out.println(Test.get(3));
   }
 }
