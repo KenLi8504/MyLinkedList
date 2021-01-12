@@ -35,6 +35,9 @@ public class MyLinkedList{
 
   public void add(int index, String value){
     Node NewNode = new Node (value);
+    if ( index < 0 || index > size){
+      throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
     if (size == 0){
       start = NewNode;
       end = NewNode;
@@ -43,10 +46,7 @@ public class MyLinkedList{
     else{
       int i = 0;
       Node Current = start;
-      if ( index < 0 || index > size){
-        throw new IndexOutOfBoundsException ("this is not a valid index!");
-      }
-      else if (index == 0){
+      if (index == 0){
         start.setPrev(NewNode);
         NewNode.setNext(start);
         start = NewNode;
@@ -71,11 +71,11 @@ public class MyLinkedList{
   }
 
   public String get(int index){
-    if (size == 0){
-      return "This is an empty LinkedList!";
-    }
-    else if (index > size() - 1 || index < 0){
+    if (index > size() - 1 || index < 0){
       throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
+    else if (size == 0){
+      return "This is an empty LinkedList!";
     }
     else{
     Node Current = start;
@@ -165,14 +165,26 @@ public class MyLinkedList{
   }
 
   public void extend(MyLinkedList other){
-    Node Tail = end;
-    Node HeadOfOther = other.start;
-    Tail.setNext(HeadOfOther);
-    HeadOfOther.setPrev(Tail);
-    end = other.end;
-    size = size + other.size;
-    other.size = 0;
-    other.start = null;
-    other.end = null;
+    if (size == 0){
+      start = other.start;
+      end = other.end;
+      size = other.size;
+      other.size = 0;
+      other.start = null;
+      other.end = null;
+    }
+    else if (other.size == 0){
+    }
+    else{
+      Node Tail = end;
+      Node HeadOfOther = other.start;
+      Tail.setNext(HeadOfOther);
+      HeadOfOther.setPrev(Tail);
+      end = other.end;
+      size = size + other.size;
+      other.size = 0;
+      other.start = null;
+      other.end = null;
+    }
   }
 }
