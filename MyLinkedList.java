@@ -88,6 +88,9 @@ public class MyLinkedList{
 
   public String set (int index, String value){
     Node Current = start;
+    if (index < 0 || index > size - 1 || size == 0){
+      throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
     for (int i = 0; i < index; i++){
       Current = Current.getNext();
     }
