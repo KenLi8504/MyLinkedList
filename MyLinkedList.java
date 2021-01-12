@@ -112,6 +112,9 @@ public class MyLinkedList{
   }
 
   public String toStringReversed(){
+    if (size == 0){
+      return "[]";
+    }
     String LinkedList = "[";
     Node Current = end;
     while (Current.getPrev() != null){
@@ -159,5 +162,17 @@ public class MyLinkedList{
       size = size - 1;
       return NodeThatsGettingRemoved.getData();
     }
+  }
+
+  public void extend(MyLinkedList other){
+    Node Tail = end;
+    Node HeadOfOther = other.start;
+    Tail.setNext(HeadOfOther);
+    HeadOfOther.setPrev(Tail);
+    end = other.end;
+    size = size + other.size;
+    other.size = 0;
+    other.start = null;
+    other.end = null;
   }
 }
