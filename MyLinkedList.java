@@ -127,9 +127,16 @@ public class MyLinkedList{
     if (index > size() - 1 || index < 0){
       throw new IndexOutOfBoundsException ("this is not a valid index!");
     }
+    else if (size == 1){
+      Node Current = start;
+      start = null;
+      size = 0;
+      return Current.getData();
+    }
     else if (index == 0){
       Node Current = start;
       start = Current.getNext();
+      size = size - 1;
       return Current.getData();
     }
     else if (index == size() - 1){
@@ -137,8 +144,20 @@ public class MyLinkedList{
       Node NewEnd = Current.getPrev();
       NewEnd.setNext(null);
       end = NewEnd;
+      size = size - 1;
       return Current.getData();
     }
-    return "hi";
+    else{
+      Node Current = start;
+      for (int i = 0; i < index - 1; i++){
+        Current = Current.getNext();
+      }
+      Node NodeThatsGettingRemoved = Current.getNext();
+      Node NewNextNode = NodeThatsGettingRemoved.getNext();
+      Current.setNext(NewNextNode);
+      NewNextNode.setPrev(Current);
+      size = size - 1;
+      return NodeThatsGettingRemoved.getData();
+    }
   }
 }
