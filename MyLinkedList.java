@@ -122,4 +122,23 @@ public class MyLinkedList{
     LinkedList = LinkedList + "]";
     return LinkedList;
   }
+
+  public String remove (int index){
+    if (index > size() - 1 || index < 0){
+      throw new IndexOutOfBoundsException ("this is not a valid index!");
+    }
+    else if (index == 0){
+      Node Current = start;
+      start = Current.getNext();
+      return Current.getData();
+    }
+    else if (index == size() - 1){
+      Node Current = end;
+      Node NewEnd = Current.getPrev();
+      NewEnd.setNext(null);
+      end = NewEnd;
+      return Current.getData();
+    }
+    return "hi";
+  }
 }
